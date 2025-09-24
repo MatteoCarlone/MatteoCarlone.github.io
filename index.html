@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matteo Carlone — Robotics Software Engineer</title>
+  <meta name="description" content="Portfolio di Matteo Carlone, Robotics Software Engineer: percezione, SLAM, controllo, ROS, C++/Python e simulazione." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar" role="complementary">
+      <div class="sidebar-card card surface surface--strong">
+
+        <!-- Avatar squircle Apple-style -->
+        <div class="avatar-shell">
+          <img
+            class="avatar-img"
+            src="/content/memoji.png"
+            alt="Matteo Carlone memoji"
+            width="180"
+            height="180"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+
+        <h1 class="name">Matteo Carlone</h1>
+        <div class="role-card">Robotics Software Engineer</div>
+
+        <ul class="contact-list" aria-label="Contatti">
+  <!-- EMAIL -->
+  <li class="contact-row">
+    <!-- icona cliccabile -->
+    <a class="contact-icon contact-iconlink"
+       href="mailto:matteo.carlone99@gmail.com"
+       aria-label="Invia una email a Matteo">
+      <picture>
+        <source srcset="/content/info-emoji/mail.svg" type="image/svg+xml" />
+        <img src="/content/info-emoji/mail.png" alt="" width="22" height="22" loading="lazy" decoding="async" />
+      </picture>
+    </a>
+    <!-- testo cliccabile (resta com'è) -->
+    <a class="contact-textlink"
+       href="mailto:matteo.carlone99@gmail.com"
+       aria-label="Invia una email a Matteo">
+      matteo.carlone99@gmail.com
+    </a>
+  </li>
+
+  <!-- PHONE -->
+  <li class="contact-row">
+    <a class="contact-icon contact-iconlink"
+       href="tel:+393342346153"
+       aria-label="Chiama Matteo al numero +39 334 234 6153">
+      <picture>
+        <source srcset="/content/info-emoji/phone.png" type="image/svg+xml" />
+        <img src="/content/info-emoji/phone.png" alt="" width="22" height="22" loading="lazy" decoding="async" />
+      </picture>
+    </a>
+    <a class="contact-textlink"
+       href="tel:+393342346153"
+       aria-label="Chiama Matteo al numero +39 334 234 6153">
+      +39&nbsp;334&nbsp;234&nbsp;6153
+    </a>
+  </li>
+
+  <!-- LOCATION -->
+  <li class="contact-row">
+    <a class="contact-icon contact-iconlink"
+       href="https://www.google.com/maps/search/?api=1&query=Turin%2C%20Italy"
+       target="_blank" rel="noopener"
+       aria-label="Apri Turin, Italy su Google Maps">
+      <picture>
+        <source srcset="/content/info-emoji/location.svg" type="image/svg+xml" />
+        <img src="/content/info-emoji/location.png" alt="" width="22" height="22" loading="lazy" decoding="async" />
+      </picture>
+    </a>
+    <a class="contact-textlink"
+       href="https://www.google.com/maps/search/?api=1&query=Turin%2C%20Italy"
+       target="_blank" rel="noopener"
+       aria-label="Apri Turin, Italy su Google Maps">
+      Turin, Italy
+    </a>
+  </li>
+</ul>
+
+        <div class="social-icons">
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/matteo-carlone" target="_blank" rel="noopener" class="social-iconbox" aria-label="LinkedIn">
+                <img src="/content/info-emoji/linkedin.svg" alt="LinkedIn" />
+            </a>
+            <!-- GitHub -->
+            <a href="https://github.com/MatteoCarlone" target="_blank" rel="noopener" class="social-iconbox" aria-label="GitHub">
+                <img src="/content/info-emoji/github.svg" alt="GitHub" />
+            </a>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- Right Card: nav + contenuto -->
+    <main class="main-content">
+      <div class="right-card surface">
+        <!-- NAV integrata nella card -->
+        <div class="card-nav">
+          <ul class="card-tabs" role="tablist" aria-label="Sezioni portfolio">
+            <li><button class="tab-btn active" data-tab="about" role="tab" aria-selected="true">About</button></li>
+            <li><button class="tab-btn" data-tab="resume" role="tab" aria-selected="false">Resume</button></li>
+            <li><button class="tab-btn" data-tab="projects" role="tab" aria-selected="false">Projects</button></li>
+          </ul>
+        </div>
+
+        <!-- Contenuto dinamico -->
+        <div id="tab-content" class="card-body"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- <footer class="footer">
+    <p>&copy; 2025 Matteo Carlone — Turin, Italia</p>
+    <div class="footer-links">
+      <a href="mailto:matteo.carlone99@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/matteo-carlone" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer> -->
+
+  <!-- JS -->
+  <script defer src="/content/about.js"></script>
+  <script defer src="/content/resume.js"></script>
+  <script defer src="/content/projects.js"></script>
+  <script defer src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,713 @@
+/* =========================
+   Variables
+========================= */
+:root{
+  --bg:#0F0E0E;
+  --fg:#FFFFFF;
+  --muted:#CFCFCF;
+  --radius:16px;
+  --border:1px;
+  --speed:200ms;
+  --shadow:0 12px 30px rgba(0,0,0,.55);
+
+  --font-base:17px;
+  --font-lg:18px;
+  --line-height:1.6;
+  --line-tight:1.2;
+
+  /* Navbar (reference) */
+  --nav-bg: rgba(255,255,255,.06);
+  --nav-divider: rgba(255,255,255,.14);
+  --tab: rgba(255,255,255,.78);
+  --tab-hover: rgba(255,255,255,.92);
+  --tab-active:#F5D06E;
+
+  /* Titles underline */
+  --title-underline:#F5D06E;
+}
+
+/* =========================
+   Reset & Base
+========================= */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:var(--font-base);
+  line-height:var(--line-height);
+  min-height:100vh;
+}
+
+/* =========================
+   COOL SCROLLBAR (auto-hide + glow)
+========================= */
+* { scrollbar-width: thin; scrollbar-color: rgba(160,160,160,.35) transparent; }
+::-webkit-scrollbar{ width:14px; }
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{
+  background-color: rgba(160,160,160,.35);
+  border-radius:999px; border:3px solid transparent; background-clip:content-box;
+  transition: background-color .25s ease, box-shadow .25s ease, opacity .4s ease;
+  opacity:0;
+}
+::-webkit-scrollbar-thumb:hover{ background-color:rgba(200,200,200,.75); box-shadow:0 0 8px rgba(200,200,200,.5); }
+html:hover::-webkit-scrollbar-thumb,
+body:active::-webkit-scrollbar-thumb,
+body:focus::-webkit-scrollbar-thumb,
+body.scrolling::-webkit-scrollbar-thumb{ opacity:1; }
+::-webkit-scrollbar-button{ display:none; height:0; width:0; }
+
+/* =========================
+   Surfaces
+========================= */
+.surface{
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius);
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset, var(--shadow);
+  transition:background var(--speed),border-color var(--speed),box-shadow var(--speed),color var(--speed);
+}
+.surface:hover,.surface:focus-within{ background:rgba(255,255,255,.055); border-color:rgba(255,255,255,.18); }
+.surface--strong{ background:rgba(255,255,255,.05); }
+@supports (backdrop-filter:blur(8px)){ .surface{ backdrop-filter:saturate(160%) blur(8px); } }
+
+/* =========================
+   Layout
+========================= */
+.container{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  max-width:1400px;
+  margin:0 auto;
+  padding: 6rem 2rem 2rem;
+  gap:3rem;
+  min-height:100vh;
+  align-items:start;
+}
+
+/* =========================
+   Sidebar
+========================= */
+.sidebar{ position:sticky; 
+          top:6rem; 
+          align-self: start;
+          height: max-content;
+        }
+.sidebar-card{ padding:2rem; text-align:center; }
+.avatar{ width:120px;height:120px;background:#2a2a2a;border-radius:50%; margin:0 auto 1.5rem;border:var(--border) solid rgba(255,255,255,.22); }
+.name{ font-size:1.75rem;font-weight:700;line-height:var(--line-tight);margin-bottom:.75rem; }
+/* Ruolo come mini-card coerente */
+.role-card {
+  display: inline-block;
+  margin: 0 auto 2rem;
+  padding: 0.6rem 1.2rem;
+
+  background: rgba(255, 255, 255, 0.863);   /* bianco opaco */
+  color: var(--bg);
+  font-size: .95rem;
+  font-weight: 600;
+  border-radius: var(--radius);           /* stesso raggio delle altre card */
+
+  border: 3px solid rgba(255,255,255,.22);
+  box-shadow: 0 4px 0 rgba(255,255,255,.06) inset,
+              0 10px 20px rgba(0,0,0,.25);
+
+  transition: background var(--speed), border-color var(--speed), transform var(--speed);
+}
+
+/* Hover soft */
+.role-card:hover {
+  background: rgba(255,255,255,1);
+  border-color: rgba(255,255,255,.28);
+  transform: translateY(-1px);
+}
+
+.contact-info{ margin-bottom:2rem; text-align:left; }
+.contact-item{ margin-bottom:1.25rem; }
+.contact-label{ display:block;font-size:.75rem;font-weight:700;letter-spacing:.05em;margin-bottom:.25rem;color:var(--muted); }
+.contact-link,.contact-text{ color:var(--fg); text-decoration:none; font-size:.9rem; word-break:break-all; }
+.contact-link{ border-bottom:1px solid transparent; transition:border-bottom-color var(--speed); }
+.contact-link:hover,.contact-link:focus{ border-bottom-color:currentColor; }
+
+.contact-list{
+  list-style:none;
+  margin:0 0 2rem 0;
+  padding:0;
+  display:grid;
+  gap:.75rem;
+}
+
+.contact-row{
+  position: relative;                     /* serve al ::before cliccabile */
+  display:grid;
+  grid-template-columns: 40px 1fr;        /* col1 icona, col2 testo */
+  align-items:center;
+  gap:.75rem;
+  padding:.35rem 0;
+}
+
+/* Mini-card dell’icona (visiva) */
+.contact-icon{
+  width:40px; height:40px;
+  border-radius:12px;
+  display:grid; place-items:center;
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 10px 20px rgba(0,0,0,.28);
+  transition: background var(--speed), border-color var(--speed), transform var(--speed);
+}
+.contact-icon picture, .contact-icon img{
+  width:22px; height:22px; display:block; object-fit:contain;
+}
+
+/* L’icona diventa cliccabile “riutilizzando” l’anchor del testo */
+.contact-textlink{
+  color: var(--fg);
+  font-size: .95rem;
+  line-height: 1.35;
+  text-decoration: none;
+  position: relative;                     /* riferimento per il ::before */
+  transition: color var(--speed), text-shadow var(--speed);
+}
+
+/* Area cliccabile sopra la card icona (stesso href del testo) */
+  .contact-textlink::before{
+    content:'';
+    position:absolute;
+    left: -calc(40px + .75rem);             /* esattamente sopra la mini-card */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius:12px;                      /* per avere lo stesso cursor area */
+    cursor: inherit;
+  }
+
+/* Hover: glow sul testo + micro-lift sulla card icona */
+.contact-row:hover .contact-icon{
+  background: rgba(255,255,255,.075);
+  border-color: rgba(255,255,255,.20);
+  transform: translateY(-1px);
+}
+.contact-textlink:hover,
+.contact-textlink:focus{
+  color: var(--tab-hover);
+  text-shadow: 0 0 6px rgba(255,255,255,.4);
+  outline: 0;
+}
+
+/* le icone diventano link senza cambiare il layout */
+.contact-iconlink{
+  display: grid;                 /* mantiene il centraggio già definito su .contact-icon */
+  place-items: center;
+  text-decoration: none;
+  color: inherit;                /* niente blu/underline */
+}
+
+/* stesso hover/lift delle card social */
+.contact-iconlink:hover,
+.contact-iconlink:focus{
+  background: rgba(255,255,255,.075);
+  border-color: rgba(255,255,255,.20);
+  transform: translateY(-1px);
+}
+
+.contact-iconlink:focus-visible{
+  outline: 2px solid var(--tab-active);
+  outline-offset: 2px;
+  border-color: rgba(255,255,255,.28);
+}
+
+
+.social-icons{ display:flex; justify-content:center; gap:1rem; }
+.social-link{ opacity:.85; transition:opacity var(--speed); color:inherit; }
+.social-link:hover,.social-link:focus{ opacity:1; }
+.social-icon{ display:block; fill:currentColor; transition:fill var(--speed); }
+
+/* =========================
+   Right Card
+========================= */
+.main-content{ align-self:start; }
+.right-card{
+  position: sticky;
+  top: 2rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* =========================
+   NAVBAR integrata
+========================= */
+.card-nav{
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--nav-bg);
+  padding: .85rem 1.25rem .75rem;
+  border-bottom: 1px solid var(--nav-divider);
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.card-tabs{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+  .tab-btn{
+    background: transparent;
+    border: none;
+    color: var(--tab);
+    padding: .25rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: inherit;
+    transition: color .2s ease, opacity .2s ease;
+  }
+.tab-btn:hover{ color: var(--tab-hover); }
+.tab-btn.active{
+  color: var(--tab-active);
+  position: relative;
+}
+.tab-btn.active::after{
+  bottom: -0.3rem;
+  height: 3px;
+  width: 28px;
+  margin: 0 auto;
+  border-radius: 2px;
+  background: var(--tab-active);
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0; right: 0;
+}
+
+/* =========================
+   Card Body & Titles
+========================= */
+.card-body{ padding: 1rem 2rem 2rem; }
+.section{ margin-bottom: 3rem; }
+.section-header{ margin-bottom: 2rem; }
+
+/* Titolo con barra gialla (reference) */
+.section-title{
+  font-size:2.5rem;
+  font-weight:700;
+  line-height:1.18;
+  margin: .1rem 0 .75rem;
+  position: relative;
+}
+.section-title::after{
+  content:'';
+  display:block;
+  width: 42px;
+  height: 6px;
+  border-radius: 4px;
+  background: var(--title-underline);
+  margin-top: .35rem;
+}
+
+.hero-subtitle{ font-size:1.25rem; font-weight:600; margin-bottom:.35rem; }
+.hero-description{ font-size:var(--font-lg); color:var(--muted); }
+.about-text{ margin-top: 1.1rem; margin-bottom: 2.2rem; }
+.about-text p{ margin-bottom: 1.1rem; font-size: 1.05rem; }
+
+/* =========================
+   What I'm Doing (cards)
+========================= */
+.what-im-doing h3{ font-size:1.4rem; font-weight:700; margin-bottom:1.25rem; }
+.doing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+@media (max-width: 1100px){ .doing-grid{ grid-template-columns:repeat(2,1fr);} }
+@media (max-width: 720px){ .doing-grid{ grid-template-columns:1fr;} }
+.card{ transition:background var(--speed),color var(--speed),transform var(--speed),box-shadow var(--speed); }
+.doing-card{
+  padding: 1.25rem 1.35rem;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: start;
+  gap: 1rem;
+  border-radius: 14px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 10px 24px rgba(0,0,0,.45);
+}
+.doing-card:hover{ background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.18); transform: translateY(-2px); box-shadow: 0 1px 0 rgba(255,255,255,.1) inset, 0 16px 36px rgba(0,0,0,.55); }
+.doing-card .icon-box{ width:56px; height:56px; border-radius:12px; border:1px solid rgba(255,255,255,.18); display:grid; place-items:center; }
+.doing-card .icon-box svg{ width:26px; height:26px; fill: currentColor; }
+.doing-card h4{ font-size:1.05rem; font-weight:700; margin:.15rem 0 .35rem; }
+.doing-card p{ font-size:.95rem; color:var(--muted); margin:0; }
+
+/* =========================
+   Projects — card style
+========================= */
+.projects-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+  gap:2rem;
+}
+
+.project-card{
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 10px 24px rgba(0,0,0,.35);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.project-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 1px 0 rgba(255,255,255,.1) inset, 0 16px 36px rgba(0,0,0,.5);
+}
+
+/* Cover wrapper */
+.project-cover-wrap{
+  overflow:hidden;
+}
+.project-cover{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+  transition: transform .35s ease;
+}
+.project-card:hover .project-cover{
+  transform: scale(1.04);
+}
+
+/* Fallback cover (se non c'è immagine) */
+.project-cover--empty{
+  width:100%;
+  height:180px;
+  background: #ffffff;          /* bianco richiesto */
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+/* Corpo card */
+.project-body{
+  padding: 1.2rem 1.4rem;
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+  flex:1;
+}
+.project-body h3{
+  font-size:1.2rem;
+  font-weight:700;
+}
+.project-body p{
+  font-size:.95rem;
+  color:var(--muted);
+  line-height:1.45;
+  flex:1;
+}
+
+/* Tag */
+.project-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+}
+.tag{
+  padding:.25rem .75rem;
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: 20px;
+  font-size:.8rem;
+  font-weight:600;
+  transition: background var(--speed), color var(--speed);
+}
+
+
+
+/* =========================
+   Footer
+========================= */
+/* .footer{
+  border-top:1px solid rgba(255,255,255,.22);
+  padding:2rem; margin-top:4rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;
+}
+.footer p{ margin:0; color:var(--muted); }
+.footer-links{ display:flex; gap:2rem; }
+.footer-links a{ color:var(--fg); text-decoration:none; border-bottom:1px solid transparent; transition:border-bottom-color var(--speed); }
+.footer-links a:hover,.footer-links a:focus{ border-bottom-color:currentColor; } */
+
+/* =========================
+   Timeline (Resume) — component-like
+========================= */
+/* wrapper e linea */
+.timeline{
+  --tl-left: 22px;          /* posizione LINEA dal bordo della timeline */
+  --tl-gap: 28px;           /* indent a destra della linea */
+  --tl-color: rgba(255,255,255,.22);
+  --tl-dot: 10px;
+
+  position: relative;
+  padding-left: calc(var(--tl-left) + var(--tl-gap));
+  padding-bottom: 24px; /* per “cap” finale */
+}
+.timeline::before{
+  content:'';
+  position:absolute;
+  left: var(--tl-left);
+  top: 0; bottom: 0;
+  width:1px;
+  background: var(--tl-color);
+}
+/* cap che tronca la coda della linea */
+.timeline::after {
+  content: '';
+  position: absolute;
+  left: var(--tl-left);
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(223, 189, 42, 0.863); /* semitrasparente */
+  transform: translate(-50%, 50%);  /* lo spinge a metà fuori dalla linea */
+}
+
+/* blocchi sezione */
+.tl-section{ margin-bottom: 3rem; }
+
+/* testa sezione con icona SULLA LINEA */
+.tl-head{
+  position: relative;
+  display:flex; align-items:center; gap:.75rem;
+  font-size:1.5rem; font-weight:700;
+  margin-bottom:1.1rem; /* micro-ritocco */
+  padding-left: 1rem; 
+}
+
+/* mini-card dell'icona di sezione, centrata sulla linea */
+.tl-sec-icon{
+  position:absolute;
+  left: calc(-1 * var(--tl-gap));       /* riporto l'icona sulla linea */
+  top: .0rem;
+  width:45px; height:45px;
+  border-radius:12px;
+  display:grid; place-items:center;
+  background: rgba(31, 30, 30, 0.96);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 10px 20px rgba(0,0,0,.28);
+  transform: translate(-50%, 0);
+}
+.tl-sec-icon img{ width:22px; height:22px; display:block; object-fit:contain; }
+
+/* item */
+.tl-item{
+  position: relative;
+  padding-left: 0;
+  margin-bottom: 2rem;
+}
+.tl-section .tl-item:first-of-type{ margin-top: .0rem; } /* respiro dopo la head */
+
+/* pallino allineato alla LINEA e “snap” sulla prima riga del titolo */
+.tl-item .tl-dot{
+  position:absolute;
+  left: calc(-1 * var(--tl-gap));
+  top: calc(0.5em + 0.125rem); /* snap al titolo */
+  width: var(--tl-dot); height: var(--tl-dot);
+  border-radius:50%;
+  background:#fff;
+  transform: translate(-50%, 0);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 5px rgba(255,255,255,.06);
+}
+
+/* contenuto item */
+.tl-title{
+  font-size:1.15rem;
+  font-weight:700;
+  line-height:1.25; /* aiuta lo “snap” del dot */
+  margin:0 0 .8rem;
+}
+.tl-meta{ color:var(--muted); margin-bottom:.65rem; font-size:.95rem; }
+.tl-bullets{ list-style:none; padding-left:0; }
+.tl-bullets li{
+  position:relative; padding-left:1.25rem; margin-bottom:.5rem; font-size:.95rem; line-height:1.5;
+}
+.tl-bullets li::before{
+  content:'•'; position:absolute; left:0; top:0; color:var(--muted);
+}
+
+/* ====== Focus/Accessibilità (ritocco 1) ====== */
+.tl-sec-icon:focus-visible,
+.tl-item a:focus-visible,
+.tab-btn:focus-visible{
+  outline:0;
+  box-shadow: 0 0 0 3px rgba(245,208,110,.45);
+  border-color: rgba(245,208,110,.65);
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 768px){
+  .container{ grid-template-columns:1fr; gap:2rem; padding:1rem; padding-top:5rem; }
+  .sidebar{ position:static; }
+  .right-card{ position: static; }
+  .sidebar-card{ padding:1.5rem; }
+  .section-title{ font-size:2rem; }
+  .doing-grid, .projects-grid{ grid-template-columns:1fr; }
+
+  .timeline{
+    --tl-left: 18px;
+    --tl-gap: 24px;
+    --tl-dot: 9px;
+    padding-left: calc(var(--tl-left) + var(--tl-gap));
+  }
+  .tl-item .tl-dot{ top: 1.0em; }
+}
+
+@media (max-width:480px){
+  .tab-btn{ font-size:.95rem; }
+  .container{ padding:.75rem; padding-top:4.5rem; }
+  .sidebar-card{ padding:1rem; }
+  .name{ font-size:1.5rem; }
+  .section-title{ font-size:1.75rem; }
+
+  /* Mobile polish timeline (ritocco 5) */
+  .tl-title{ font-size:1.08rem; }
+  .tl-bullets li{ margin-bottom:.42rem; }
+  .tl-sec-icon{ width:40px; height:40px; }
+
+  .project-card{ padding:1rem; }
+}
+
+/* ==== Avatar come card coerente ==== */
+.avatar-shell{
+  width: 160px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 1.6rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 14px 28px rgba(0,0,0,.38);
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+}
+.avatar-img{ width:110%; height:auto; object-fit:contain; display:block; }
+.avatar-shell:hover{ background: rgba(255,255,255,.075); border-color: rgba(255,255,255,.20); }
+.avatar-shell:hover .avatar-img{ transform: translateY(-1px); }
+@media (max-width: 768px){ .avatar-shell{ width:180px; } }
+@media (max-width: 420px){ .avatar-shell{ width:160px; } }
+
+/* === Contacts (mini-card solo sull’icona) === */
+.contact-list{ list-style:none; margin:0 0 2rem 0; padding:0; display:grid; gap:.75rem; }
+.contact-row{
+  display:grid; grid-template-columns:40px 1fr; align-items:center;
+  gap:.75rem; padding:.35rem 0; background:transparent; border:0;
+}
+.contact-icon{
+  width:40px; height:40px; border-radius:12px; display:grid; place-items:center;
+  background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 10px 20px rgba(0,0,0,.28);
+  transition: background var(--speed), border-color var(--speed), transform var(--speed);
+}
+.contact-icon img{ width:22px; height:22px; display:block; object-fit:contain; }
+.contact-textlink{
+  color:var(--fg); font-size:.95rem; line-height:1.35; text-decoration:none;
+  position:relative; display:inline-flex; align-items:center; min-height:40px; width:max-content;
+  transition: color var(--speed), text-shadow var(--speed), opacity var(--speed);
+}
+.contact-textlink:hover,.contact-textlink:focus,.contact-textlink:active{
+  color: var(--tab-hover); text-shadow: 0 0 6px rgba(255,255,255,.4); outline:0;
+}
+.contact-row + .contact-row{ border-top:none; padding-top:.35rem; margin-top:.1rem; }
+
+/* === Social icon box (LinkedIn + GitHub) === */
+.social-icons{ display:flex; justify-content:center; gap:1rem; margin-top:1rem; }
+.social-iconbox{
+  width:40px; height:40px; border-radius:12px; display:grid; place-items:center;
+  background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 10px 20px rgba(0,0,0,.28);
+  transition: background var(--speed), border-color var(--speed), transform var(--speed), opacity var(--speed);
+}
+.social-iconbox img{ width:22px; height:22px; display:block; object-fit:contain; }
+.social-iconbox:hover{ background: rgba(255,255,255,.075); border-color: rgba(255,255,255,.20); transform: translateY(-1px); }
+
+/* ===== Custom Cursor ===== */
+:root{ --cursor: #fad160; } /* giallo del tema */
+@media (pointer: fine){
+  html,body{ cursor: none; } /* nasconde il cursore nativo solo su mouse “fine” */
+  a,
+  button,
+  [role="button"],
+  .tab-btn,
+  .contact-iconlink,
+  .project-card a{
+    cursor: inherit;
+  }
+}
+
+/* pallino principale */
+.cursor-dot{
+  position: fixed;
+  z-index: 5000;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--cursor);
+  mix-blend-mode: normal;
+  pointer-events: none;
+  transform: translate(-50%,-50%);
+  will-change: transform, box-shadow;
+  transition: transform 120ms ease;
+}
+
+/* scia */
+.cursor-trail{
+  position: fixed;
+  z-index: 4999;
+  inset: 0;
+  pointer-events: none;
+}
+.cursor-trail .trail-dot{
+  position: absolute;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--cursor);
+  transform: translate(-50%,-50%);
+  opacity: .22;            /* più trasparente della punta */
+  filter: blur(0.4px);
+}
+
+/* feedback su elementi interattivi */
+@keyframes cursorPulse{
+  0%,100%{
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 0 0 rgba(250, 250, 250, 0.726);
+  }
+  50%{
+    transform: translate(-50%, -50%) scale(1.35);
+    box-shadow: 0 0 0 9px rgba(255, 255, 255, 0.308);
+  }
+}
+
+body[data-cursor="link"] .cursor-dot{
+  animation: cursorPulse .5s ease-in-out infinite;
+}
+
+/* riduci movimento per accessibilità */
+@media (prefers-reduced-motion: reduce){
+  .cursor-trail{ display:none; }
+  .cursor-dot{ transition: none; }
+}
+
+/* mobile: disabilita (evita stranezze su iOS) */
+@media (hover: none), (pointer: coarse){
+  html,body{ cursor: auto; }
+  .cursor-dot,.cursor-trail{ display:none !important; }
+}
