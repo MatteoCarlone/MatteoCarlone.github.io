@@ -7,42 +7,47 @@
 
       education: [
         {
-          title: "M.Sc. in Robotics Engineering",
-          meta: "Politecnico di Torino • 2018 – 2020",
+          title: "Master Thesis Mechatronic Department, MCI Innsbruck, Austria – Polytechnic University",
+          meta: "Innsbruck, Austria • Feb 2023 – Sep 2023",
           bullets: [
-            "Specializzazione in controlli automatici e sistemi robotici",
-            "Tesi su \"Advanced SLAM techniques for autonomous navigation\"",
-            "Voto: 110/110 cum laude"
+            "Developed a modular fleet orchestration framework for Autonomous Mobile Robots (AMRs) in industrial logistics environments, focusing on task allocation, path coordination, and agent monitoring.",
+            "Designed a system architecture enabling seamless integration of heterogeneous robot platforms using ROS2, and validated the framework in both simulated and physical environments.",
+            "Initiated the foundation for a robotics LabCamp, authoring hands-on technical exercises and documentation that supported education and outreach initiatives at Zentrum für Produktion, Robotik & Automatisierung.",
+            "Demonstrated strong research, software development, and technical communication skills, bridging academic research and applied robotics."
           ]
         },
         {
-          title: "B.Sc. in Biomedical Engineering",
-          meta: "Politecnico di Torino • 2015 – 2018",
+          title: "Ms in Robotics Engineering, Polytechnic University of Genoa",
+          meta: "Genoa, Italy • Sep 2021 – Feb 2023",
           bullets: [
-            "Fondamenti di ingegneria biomedica e sistemi di controllo",
-            "Progetto finale su sistemi di acquisizione dati biomedici",
-            "Voto: 108/110"
+            "Focused on advanced topics in robotics, mechatronics, and control systems, with practical experience in ROS2, embedded programming, and robotic simulation.",
+            "Developed strong foundations in AI integration and automation technologies."
+          ]
+        },
+        {
+          title: "Bs in Biomedical Engineering, Polytechnic University of Genoa",
+          meta: "Genoa, Italy • Sep 2018 – Jul 2021",
+          bullets: [
+            "Built a solid foundation in engineering applied to healthcare, including courses in biomechanics, medical devices, and signal processing.",
+            "Gained multidisciplinary skills bridging biology and technology."
           ]
         }
       ],
 
       experience: [
         {
-          title: "Senior Robotics Software Engineer",
-          meta: "Reply S.p.A. • 2023 – Presente",
+          title: "Robotics & Embedded Software Engineer, Concept Engineering – Reply",
+          meta: "Turin, Italy • Nov 2023 – Presente",
           bullets: [
-            "Sistemi di percezione per robot industriali (vision + deep learning)",
-            "Visual-SLAM e navigazione autonoma in ambienti strutturati",
-            "Ottimizzazione real-time e robustezza dei sistemi di controllo critici"
-          ]
-        },
-        {
-          title: "Robotics Software Developer",
-          meta: "Vari progetti • 2020 – 2023",
-          bullets: [
-            "Integrazione ROS/ROS2, pipeline CI/CD e deployment",
-            "Simulazione e testing hardware-in-the-loop",
-            "Tooling, logging e telemetria per diagnosi sul campo"
+            "Competence Center: Industrial IoT & Robotics",
+            "Industry Focus: Manufacturing, Cybersecurity, R&D",
+            "Led technical assessments across automotive and food-processing plants in Europe to design and deploy tailored Industrial IoT solutions.",
+            "Architected and implemented containerized microservices for real-time data acquisition from edge devices (PLCs, industrial sensors) using Docker, Kubernetes, and Yocto.",
+            "Built scalable, cloud-integrated backends for analytics and KPI monitoring (e.g., OEE), supporting deployment across industrial gateways, VMs, and cloud platforms.",
+            "Engineered a custom VPN stack utilizing WireGuard and VPP, improving data security, reliability, and latency across critical production environments.",
+            "Developed a modular orchestration platform for AMR fleet management, enabling real-time coordination and task allocation in dynamic factory environments.",
+            "Integrated YOLO-based CV models for foreign object detection in safety-critical zones; validated system in operational testing with Turin Airport.",
+            "Prototyped LLM-based natural language interfaces for human-robot interaction using on-premise LLM deployment to meet latency and security requirements."
           ]
         }
       ]
