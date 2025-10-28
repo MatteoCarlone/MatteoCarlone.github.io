@@ -2,54 +2,75 @@
 window.AboutContent = {
   data: {
     title: "About Me",
-    subtitle: "Sistemi autonomi, percezione e controllo.",
-    description: "Costruisco software affidabile per robot nel mondo reale.",
+    subtitle: "🚀 Hi, I’m Matteo",
     paragraphs: [
-      "Sono un ingegnere software specializzato nello sviluppo di sistemi robotici autonomi. La mia esperienza si concentra su percezione ambientale, algoritmi SLAM e sistemi di controllo per applicazioni robotiche industriali e di ricerca.",
-      "Lavoro principalmente con ROS/ROS2, C++ e Python per creare soluzioni robuste che integrano sensori, algoritmi di computer vision e sistemi di pianificazione del movimento. Mi occupo anche di simulazione e testing per garantire l'affidabilità dei sistemi in ambienti reali.",
-      "La mia passione è trasformare ricerca accademica in applicazioni pratiche che possano operare efficacemente nel mondo reale, con particolare attenzione alla sicurezza e alle prestazioni."
+      "A robotics and embedded systems engineer by day, and a curious builder by night. I love turning ideas into working prototypes, whether it’s coordinating <strong>robot fleets 🦾</strong>, wiring up <strong>ESP32 experiments 🔌</strong>, or testing <strong>AI-powered systems 🤖</strong> that (hopefully) don’t break things.",
+      "This space is a mix of what I build, break, and (eventually) fix — from <strong>robotics experiments</strong> and <strong>IoT tinkering</strong>, to personal hacks and weekend lab chaos ⚙️.",
+      "For the more serious visitors 👀, you’ll find a snapshot of my <strong>CV</strong>, a list of <strong>skills that define me</strong>, and the <strong>technologies I use every day</strong>.",
+      "Thanks for stopping by — just like most of my projects, this site is work in progress, exactly like me! 🔧"
     ],
     doingCards: [
       {
-        title: "Perception & SLAM",
-        description: "Algoritmi di localizzazione e mappatura simultanea per navigazione autonoma.",
-        icon: `<svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0-6C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z"/></svg>`
+        title: "R&D & Robotics",
+        description: "Ricerca applicata, prototipazione rapida e sistemi robotici autonomi end-to-end.",
+        iconSymbol: "🦾"
       },
       {
-        title: "Control & Planning",
-        description: "Sistemi di controllo e pianificazione del movimento per manipolatori e robot mobili.",
-        icon: `<svg viewBox="0 0 24 24"><path d="M3 3h18v2H3V3Zm0 8h12v2H3v-2Zm0 8h18v2H3v-2Zm16-8 4 4-4 4-1.41-1.41L19.17 14l-1.58-1.59L19 11Z"/></svg>`
+        title: "Industrial IoT & Cybersecurity",
+        description: "Architetture connesse resilienti, edge computing e difesa delle infrastrutture industriali.",
+        iconSymbol: "🏭"
       },
       {
-        title: "Simulation & Tooling",
-        description: "Ambienti di simulazione e strumenti per testing e validazione di sistemi robotici.",
-        icon: `<svg viewBox="0 0 24 24"><path d="M4 3h16v6H4V3Zm0 8h16v10H4V11Zm2 2v6h12v-6H6Z"/></svg>`
-      },
-      {
-        title: "Systems & DevOps",
-        description: "Integrazione ROS2, deployment e architetture software scalabili per robotica.",
-        icon: `<svg viewBox="0 0 24 24"><path d="M12 2 1 7l11 5 9-4.09V17h2V7M5 11.18V17l7 3 7-3v-5.82L12 15l-7-3.82Z"/></svg>`
+        title: "Side Projects & Experiments",
+        description: "Robotica da weekend, automazione domestica, tinkering con AI e idee borderline.",
+        iconSymbol: "🧪"
       }
+    ],
+    skills: [
+      { name: "ROS", icon: "https://raw.githubusercontent.com/openrobotics/artwork/master/ros_logo.svg" },
+      { name: "Rust", icon: "https://www.rust-lang.org/static/images/rust-logo-blk.svg" },
+      { name: "Docker", icon: "https://www.svgrepo.com/show/353659/docker-icon.svg" },
+      { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+      { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
+      { name: "C", icon: "./content/skills-icons/C.svg" },
+      { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "Go", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" },
+      { name: "MATLAB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg" },
+      { name: "ESP32", icon: "./content/skills-icons/Esp32.svg" },
+      { name: "Raspberry Pi", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" },
+      { name: "Yocto", icon: "./content/skills-icons/Yocto.svg" },
+      { name: "YOLO", icon: "./content/skills-icons/YOLO.svg" },
+      { name: "CUDA", icon: "./content/skills-icons/CUDA.svg" },
+      { name: "Fusion 360", icon: "./content/skills-icons/AutodeskFusion.svg" }
     ]
   },
 
   render() {
     const doingCards = this.data.doingCards.map(card => `
       <div class="doing-card surface">
-        <div class="icon-box">${card.icon}</div>
-        <div>
-          <h4>${card.title}</h4>
-          <p>${card.description}</p>
-        </div>
+        <div class="icon-box">${card.iconSymbol ?? ""}</div>
+        <h4>${card.title}</h4>
+        <p class="card-description">${card.description}</p>
       </div>
     `).join('');
+
+    const skillsTrack = (this.data.skills || []).map(skill => `
+      <div class="skill-item" title="${skill.name}" aria-label="${skill.name}">
+        <div class="skill-icon">
+          <img src="${skill.icon}" alt="${skill.name} icon" loading="lazy" />
+        </div>
+        <span class="skill-label" aria-hidden="true">${skill.name}</span>
+      </div>
+    `).join('');
+    const hasSkills = skillsTrack.length > 0;
 
     return `
       <section class="section">
         <div class="section-header">
           <h2 class="section-title">${this.data.title}</h2>
           <p class="hero-subtitle">${this.data.subtitle}</p>
-          <p class="hero-description">${this.data.description}</p>
+          ${this.data.description ? `<p class="hero-description">${this.data.description}</p>` : ""}
         </div>
 
         <div class="about-text">
@@ -62,7 +83,147 @@ window.AboutContent = {
             ${doingCards}
           </div>
         </div>
+
+        ${hasSkills ? `
+        <div class="skills-section" id="skills-section">
+          <h3>Skills</h3>
+          <div class="skills-wrap">
+            <button class="skills-arrow skills-arrow--prev" type="button" aria-label="Scroll skills to the left">
+              <span aria-hidden="true">&lsaquo;</span>
+            </button>
+            <div class="skills-scroll" id="skills-scroll">
+              ${skillsTrack}
+            </div>
+            <button class="skills-arrow skills-arrow--next" type="button" aria-label="Scroll skills to the right">
+              <span aria-hidden="true">&rsaquo;</span>
+            </button>
+          </div>
+          <div class="skills-progress">
+            <span class="skills-progress-bar"></span>
+          </div>
+        </div>` : ''}
       </section>
     `;
+  },
+
+  mount(root) {
+    this.unmount();
+    if (!root) return;
+    const section = root.querySelector('#skills-section');
+    if (!section) return;
+    const scroll = section.querySelector('#skills-scroll');
+    const bar = section.querySelector('.skills-progress-bar');
+    const prev = section.querySelector('.skills-arrow--prev');
+    const next = section.querySelector('.skills-arrow--next');
+    if (!scroll || !bar) return;
+
+    const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
+    const toggleArrow = (btn, disabled) => {
+      if (!btn) return;
+      btn.classList.toggle('is-hidden', disabled);
+      btn.disabled = !!disabled;
+      btn.setAttribute('aria-disabled', disabled ? 'true' : 'false');
+    };
+    const update = () => {
+      const maxScroll = scroll.scrollWidth - scroll.clientWidth;
+      if (maxScroll <= 0) {
+        bar.style.opacity = '0';
+        bar.style.width = '100%';
+        bar.style.left = '0%';
+        toggleArrow(prev, true);
+        toggleArrow(next, true);
+        return;
+      }
+      const visibleRatio = scroll.clientWidth / scroll.scrollWidth;
+      const width = clamp(visibleRatio * 35, 15, 35);
+      const progress = scroll.scrollLeft / maxScroll;
+      const translate = Math.min(Math.max(progress * (100 - width), 0), 100 - width);
+      bar.style.opacity = '1';
+      bar.style.width = width.toFixed(2) + '%';
+      bar.style.left = translate.toFixed(2) + '%';
+      toggleArrow(prev, scroll.scrollLeft <= 4);
+      toggleArrow(next, scroll.scrollLeft >= maxScroll - 4);
+    };
+
+    const onScroll = () => requestAnimationFrame(update);
+    scroll.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', update);
+
+    const scrollStep = () => Math.max(180, Math.min(scroll.clientWidth * 0.7, 320));
+    let autoScrollId = null;
+    const stopAutoScroll = () => {
+      if (autoScrollId) {
+        cancelAnimationFrame(autoScrollId);
+        autoScrollId = null;
+      }
+    };
+    const startAutoScroll = direction => {
+      stopAutoScroll();
+      const step = () => {
+        scroll.scrollLeft += direction * 10;
+        const maxScroll = scroll.scrollWidth - scroll.clientWidth;
+        const atEdge = direction < 0 ? scroll.scrollLeft <= 0 : scroll.scrollLeft >= maxScroll;
+        if (atEdge) {
+          stopAutoScroll();
+          return;
+        }
+        autoScrollId = requestAnimationFrame(step);
+      };
+      step();
+    };
+    const cleanupHandlers = [
+      () => {
+        stopAutoScroll();
+        scroll.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', update);
+      }
+    ];
+    const attachArrow = (btn, direction) => {
+      if (!btn) return;
+      const onClick = () => {
+        scroll.scrollBy({ left: direction * scrollStep(), behavior: 'smooth' });
+      };
+      const onPointerDown = event => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        btn.setPointerCapture?.(event.pointerId);
+        startAutoScroll(direction);
+      };
+      const release = event => {
+        if (event.pointerId && btn.hasPointerCapture?.(event.pointerId)) {
+          btn.releasePointerCapture(event.pointerId);
+        }
+        stopAutoScroll();
+      };
+      btn.addEventListener('click', onClick);
+      btn.addEventListener('pointerdown', onPointerDown);
+      btn.addEventListener('pointerup', release);
+      btn.addEventListener('pointercancel', release);
+      btn.addEventListener('pointerleave', release);
+      cleanupHandlers.push(() => {
+        btn.removeEventListener('click', onClick);
+        btn.removeEventListener('pointerdown', onPointerDown);
+        btn.removeEventListener('pointerup', release);
+        btn.removeEventListener('pointercancel', release);
+        btn.removeEventListener('pointerleave', release);
+      });
+    };
+    attachArrow(prev, -1);
+    attachArrow(next, 1);
+    update();
+
+    this._cleanup = () => {
+      cleanupHandlers.forEach(fn => {
+        try { fn(); } catch (err) {
+          console.error(err);
+        }
+      });
+      this._cleanup = null;
+    };
+  },
+
+  unmount() {
+    if (this._cleanup) {
+      this._cleanup();
+    }
   }
 };

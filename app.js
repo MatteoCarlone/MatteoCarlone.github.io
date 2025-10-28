@@ -63,11 +63,17 @@ class TabNavigation {
   }
 
   load(tabName) {
+    if (window.AboutContent && typeof window.AboutContent.unmount === 'function') {
+      window.AboutContent.unmount();
+    }
     let html = 'Loading...';
     if (tabName === 'about' && window.AboutContent) html = window.AboutContent.render();
     if (tabName === 'resume' && window.ResumeContent) html = window.ResumeContent.render();
     if (tabName === 'projects' && window.ProjectsContent) html = window.ProjectsContent.render();
     this.tabContent.innerHTML = html;
+    if (tabName === 'about' && window.AboutContent && typeof window.AboutContent.mount === 'function') {
+      window.AboutContent.mount(this.tabContent);
+    }
   }
 }
 
